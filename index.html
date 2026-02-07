@@ -1,4 +1,7 @@
-<!DOCTYPE html>
+
+# Create the updated HTML with equal-sized collection items and new image structure
+
+html_content = '''<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -425,6 +428,76 @@
             margin-top: 0.5rem;
         }
 
+        /* Collection Section - EQUAL SIZES */
+        .collection-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .collection-item {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            cursor: pointer;
+            background: var(--secondary);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            height: 300px; /* FIXED HEIGHT - All same size */
+            width: 100%;
+        }
+
+        .collection-item:hover {
+            border-color: var(--gold);
+            box-shadow: 0 20px 40px rgba(218, 165, 32, 0.2);
+        }
+
+        .collection-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .collection-item img.active {
+            opacity: 1;
+        }
+
+        .collection-item img:first-child {
+            opacity: 1;
+        }
+
+        .collection-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            padding: 1.5rem;
+            z-index: 10;
+        }
+
+        .collection-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--gold);
+        }
+
+        /* Certificate specific styles */
+        .cert-frame {
+            background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
+            padding: 8px;
+            border-radius: 12px;
+        }
+
+        .cert-frame img {
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
         /* Gallery Styles */
         .gallery-tabs {
             display: flex;
@@ -506,75 +579,6 @@
         .gallery-category {
             font-size: 0.85rem;
             color: var(--gold);
-        }
-
-        /* Collection Section - Special Hover Effect */
-        .collection-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .collection-item {
-            position: relative;
-            border-radius: 16px;
-            overflow: hidden;
-            cursor: pointer;
-            background: var(--secondary);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            aspect-ratio: 4/3;
-        }
-
-        .collection-item:hover {
-            border-color: var(--gold);
-            box-shadow: 0 20px 40px rgba(218, 165, 32, 0.2);
-        }
-
-        .collection-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            position: absolute;
-            top: 0;
-            left: 0;
-            opacity: 0;
-            transition: opacity 0.5s ease;
-        }
-
-        .collection-item img.active {
-            opacity: 1;
-        }
-
-        .collection-item img:first-child {
-            opacity: 1;
-        }
-
-        .collection-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
-            padding: 1.5rem;
-            z-index: 10;
-        }
-
-        .collection-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--gold);
-        }
-
-        /* Certificate specific styles */
-        .cert-frame {
-            background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
-            padding: 8px;
-            border-radius: 12px;
-        }
-
-        .cert-frame img {
-            border-radius: 8px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         /* Lightbox */
@@ -763,33 +767,43 @@
         }
 
         /* Mobile */
+        @media (max-width: 968px) {
+            .collection-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
         @media (max-width: 768px) {
             nav {
                 padding: 1rem 1.5rem;
             }
-
+            
             .nav-links {
                 display: none;
             }
-
+            
             .hero-stats {
                 gap: 2rem;
             }
-
+            
             section {
                 padding: 4rem 1.5rem;
             }
-
+            
             .timeline {
                 padding-left: 2rem;
             }
-
+            
             .contact-section {
                 padding: 2rem;
             }
 
-            .gallery-grid, .collection-grid {
+            .collection-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .collection-item {
+                height: 250px;
             }
 
             .lightbox-nav {
@@ -811,7 +825,6 @@
 
         .hidden { display: none !important; }
     </style>
-<base target="_blank">
 </head>
 <body>
     <nav>
@@ -834,7 +847,7 @@
             </div>
             <h1>Ahmed Anan</h1>
             <p class="hero-subtitle">Head of Programs (AI-Driven Content) · Senior Program Director<br>Broadcast · Documentaries · AI-Integrated Production</p>
-
+            
             <div class="hero-stats">
                 <div class="stat-item">
                     <span class="stat-number">15+</span>
@@ -849,7 +862,7 @@
                     <span class="stat-label">Countries</span>
                 </div>
             </div>
-
+            
             <div class="cta-buttons">
                 <a href="#collection" class="btn btn-primary">View My Work</a>
                 <a href="https://www.linkedin.com/in/ahmed-enan-9b205172" target="_blank" class="btn btn-secondary">LinkedIn Profile</a>
@@ -872,38 +885,38 @@
             <span class="section-tag">Core Competencies</span>
             <h2 class="section-title">Expertise & Capabilities</h2>
         </div>
-
+        
         <div class="expertise-grid">
             <div class="expertise-card fade-in">
                 <div class="expertise-icon">📡</div>
                 <h3>Broadcast Direction</h3>
                 <p>End-to-end production oversight for news programs, political talk shows, documentaries, and live broadcasts from concept to final delivery.</p>
             </div>
-
+            
             <div class="expertise-card fade-in">
                 <div class="expertise-icon">🤖</div>
                 <h3>AI Production Integration</h3>
                 <p>Implementing AI tools across research, content development, editing, and visual enhancement to optimize workflows and storytelling impact.</p>
             </div>
-
+            
             <div class="expertise-card fade-in">
                 <div class="expertise-icon">🎬</div>
                 <h3>Documentary Filmmaking</h3>
                 <p>Directing and filming high-profile interviews and military coverage, including live exercises and war reporting from conflict zones.</p>
             </div>
-
+            
             <div class="expertise-card fade-in">
                 <div class="expertise-icon">👥</div>
                 <h3>Team Leadership</h3>
                 <p>Leading multidisciplinary teams of producers, editors, GFX artists, and technical staff across high-pressure broadcast environments.</p>
             </div>
-
+            
             <div class="expertise-card fade-in">
                 <div class="expertise-icon">⚡</div>
                 <h3>Live Broadcasting</h3>
                 <p>Directing live news bulletins, studio programs, and breaking news coverage with precision timing and editorial accuracy.</p>
             </div>
-
+            
             <div class="expertise-card fade-in">
                 <div class="expertise-icon">🎨</div>
                 <h3>Visual Storytelling</h3>
@@ -917,7 +930,7 @@
             <span class="section-tag">Career Journey</span>
             <h2 class="section-title">Professional Experience</h2>
         </div>
-
+        
         <div class="timeline">
             <div class="timeline-item">
                 <div class="timeline-header">
@@ -929,7 +942,7 @@
                 </div>
                 <p class="timeline-desc">Overseeing end-to-end production of television programs, documentaries, political talk shows, and special reports. Managing live broadcasts and breaking news coverage including war reporting and military exercises.</p>
             </div>
-
+            
             <div class="timeline-item">
                 <div class="timeline-header">
                     <div>
@@ -940,7 +953,7 @@
                 </div>
                 <p class="timeline-desc">Directed high-profile interviews with senior military leadership. Covered live military exercises (AHMOS 2019, Bright Star 2023) operating DSLR and drone systems for aerial and ground footage.</p>
             </div>
-
+            
             <div class="timeline-item">
                 <div class="timeline-header">
                     <div>
@@ -951,7 +964,7 @@
                 </div>
                 <p class="timeline-desc">Directed the political talk show "Maidan Al-Syasa," managing studio output, live direction, and post-production in alignment with international broadcast editorial standards.</p>
             </div>
-
+            
             <div class="timeline-item">
                 <div class="timeline-header">
                     <div>
@@ -962,7 +975,7 @@
                 </div>
                 <p class="timeline-desc">Directed flagship political and morning programs, managing production teams and editorial coordination for news bulletins and war reporting from conflict environments.</p>
             </div>
-
+            
             <div class="timeline-item">
                 <div class="timeline-header">
                     <div>
@@ -976,50 +989,46 @@
         </div>
     </section>
 
-    <!-- NEW COLLECTION SECTION -->
+    <!-- COLLECTION SECTION - EQUAL SIZES -->
     <section id="collection">
         <div class="section-header fade-in">
             <span class="section-tag">Portfolio</span>
             <h2 class="section-title">Collection</h2>
             <p style="color: var(--text-muted); margin-top: 1rem;">Hover over images to see the collection</p>
         </div>
-
+        
         <div class="collection-grid" id="collectionGrid">
-            <!-- Collection items with rotating images on hover -->
-            <div class="collection-item" onclick="openLightbox(this)" data-images="1000004541.jpg,1000004543.jpg,1000004545.jpg,1000004546.jpg,1000004547.jpg,1000004549.jpg,1000004550.jpg,1000004551.jpg,1000004552.jpg">
-                <img src="1000004541.jpg" alt="Work 1" class="active" onerror="this.src='https://images.unsplash.com/photo-1595590424283-b8f17842773f?w=800&q=80'">
-                <img src="1000004543.jpg" alt="Work 2" onerror="this.src='https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=800&q=80'">
-                <img src="1000004545.jpg" alt="Work 3" onerror="this.src='https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=800&q=80'">
-                <img src="1000004546.jpg" alt="Work 4" class="active" onerror="this.src='https://images.unsplash.com/photo-1542744095-fcf48d80b0fd?w=800&q=80'">
-                <img src="1000004547.jpg" alt="Work 5" onerror="this.src='https://images.unsplash.com/photo-1536240478700-b869070f9279?w=800&q=80'">
-                <img src="1000004549.jpg" alt="Work 6" onerror="this.src='https://images.unsplash.com/photo-1471341971476-ae15ff5dd4ea?w=800&q=80'">
-                <img src="1000004550.jpg" alt="Work 7" class="active" onerror="this.src='https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=800&q=80'">
-                <img src="1000004551.jpg" alt="Work 8" onerror="this.src='https://images.unsplash.com/photo-1506947411487-a56738267384?w=800&q=80'">
-                <img src="1000004552.jpg" alt="Work 9" onerror="this.src='https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=800&q=80'">
+            <!-- Collection 1: Production -->
+            <div class="collection-item" onclick="openLightbox(this)" data-images="1000004541.jpg,1000004543.jpg,1000004545.jpg">
+                <img src="1000004541.jpg" alt="Production 1" class="active" onerror="this.src='https://images.unsplash.com/photo-1595590424283-b8f17842773f?w=800&q=80'">
+                <img src="1000004543.jpg" alt="Production 2" onerror="this.src='https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=800&q=80'">
+                <img src="1000004545.jpg" alt="Production 3" onerror="this.src='https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=800&q=80'">
                 <div class="collection-overlay">
-                    <div class="collection-title">Production Collection 1</div>
+                    <div class="collection-title">Production Collection</div>
                 </div>
             </div>
-
+            
+            <!-- Collection 2: Military Exercise -->
             <div class="collection-item" onclick="openLightbox(this)" data-images="5912.jpg,22257.jpg,22294.jpg,12700.png">
-                <img src="5912.jpg" alt="Work 10" class="active" onerror="this.src='https://images.unsplash.com/photo-1542744095-fcf48d80b0fd?w=800&q=80'">
-                <img src="22257.jpg" alt="Work 11" onerror="this.src='https://images.unsplash.com/photo-1536240478700-b869070f9279?w=800&q=80'">
-                <img src="22294.jpg" alt="Work 12" onerror="this.src='https://images.unsplash.com/photo-1471341971476-ae15ff5dd4ea?w=800&q=80'">
-                <img src="12700.png" alt="Work 13" onerror="this.src='https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=800&q=80'">
+                <img src="5912.jpg" alt="Military 1" class="active" onerror="this.src='https://images.unsplash.com/photo-1542744095-fcf48d80b0fd?w=800&q=80'">
+                <img src="22257.jpg" alt="Military 2" onerror="this.src='https://images.unsplash.com/photo-1536240478700-b869070f9279?w=800&q=80'">
+                <img src="22294.jpg" alt="Military 3" onerror="this.src='https://images.unsplash.com/photo-1471341971476-ae15ff5dd4ea?w=800&q=80'">
+                <img src="12700.png" alt="Military 4" onerror="this.src='https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=800&q=80'">
                 <div class="collection-overlay">
-                    <div class="collection-title">Milatiary exercise</div>
+                    <div class="collection-title">Military Exercise</div>
                 </div>
             </div>
-
+            
+            <!-- Collection 3: Interview Production -->
             <div class="collection-item" onclick="openLightbox(this)" data-images="2499.jpg,22244.jpg,12701.png,22267.jpg,22278.jpg,22266.jpg">
-                <img src="2499.jpg" alt="Work 14" class="active" onerror="this.src='https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=800&q=80'">
-                <img src="22244.jpg" alt="Work 15" onerror="this.src='https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=800&q=80'">
-                <img src="12701.png" alt="Work 16" onerror="this.src='https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=800&q=80'">
-                <img src="22267.jpg" alt="Work 16" onerror="this.src='https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=800&q=80'">
-                <img src="22278.jpg" alt="Work 17" onerror="this.src='https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=800&q=80'">
-                <img src="22266.jpg" alt="Work 18" onerror="this.src='https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=800&q=80'">
-                                <div class="collection-overlay">
-                    <div class="collection-title">Interview Production </div>
+                <img src="2499.jpg" alt="Interview 1" class="active" onerror="this.src='https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=800&q=80'">
+                <img src="22244.jpg" alt="Interview 2" onerror="this.src='https://images.unsplash.com/photo-1506947411487-a56738267384?w=800&q=80'">
+                <img src="12701.png" alt="Interview 3" onerror="this.src='https://images.unsplash.com/photo-1542744095-fcf48d80b0fd?w=800&q=80'">
+                <img src="22267.jpg" alt="Interview 4" onerror="this.src='https://images.unsplash.com/photo-1536240478700-b869070f9279?w=800&q=80'">
+                <img src="22278.jpg" alt="Interview 5" onerror="this.src='https://images.unsplash.com/photo-1471341971476-ae15ff5dd4ea?w=800&q=80'">
+                <img src="22266.jpg" alt="Interview 6" onerror="this.src='https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=800&q=80'">
+                <div class="collection-overlay">
+                    <div class="collection-title">Interview Production</div>
                 </div>
             </div>
         </div>
@@ -1030,59 +1039,59 @@
             <span class="section-tag">Credentials</span>
             <h2 class="section-title">Certificates & Recognition</h2>
         </div>
-
+        
         <div class="gallery-tabs fade-in">
             <button class="gallery-tab active" onclick="filterCerts('all')">All</button>
             <button class="gallery-tab" onclick="filterCerts('military')">Military</button>
+            <button class="gallery-tab" onclick="filterCerts('professional')">Professional</button>
             <button class="gallery-tab" onclick="filterCerts('technical')">Technical</button>
         </div>
-
+        
         <div class="gallery-grid" id="certGallery">
             <!-- Certificate 1: Tabuk 5 -->
             <div class="gallery-item cert-item" data-cert="military" onclick="openLightbox(this)">
                 <div class="cert-frame">
-                    <img src="CamScanner 07-09-2022 22.28.jpg" alt="Tabuk 5 2021 Certificate" style="height: 220px; object-fit: contain; background: #f5f5f5;" onerror="this.src='https://via.placeholder.com/400x300/1a1a1a/daa520?text=Tabuk+5+2021'">
+                    <img src="1000004534.jpg" alt="Tabuk 5 2021 Certificate" style="height: 220px; object-fit: contain; background: #f5f5f5;" onerror="this.src='https://via.placeholder.com/400x300/1a1a1a/daa520?text=Tabuk+5+2021'">
                 </div>
                 <div class="gallery-overlay">
                     <div class="gallery-title">Tabuk 5 2021</div>
                     <div class="gallery-category">Saudi Ministry of Defense</div>
                 </div>
             </div>
-
+            
             <!-- Certificate 2: Conflict Zone -->
             <div class="gallery-item cert-item" data-cert="military" onclick="openLightbox(this)">
                 <div class="cert-frame">
-                    <img src="24626.jpg" alt="Conflict Zone Certificate" style="height: 220px; object-fit: contain; background: #f5f5f5; style="transform: rotate(-90deg);" onerror="this.src='https://via.placeholder.com/400x300/1a1a1a/daa520?text=Conflict+Zone'">
+                    <img src="1000004535.jpg" alt="Conflict Zone Certificate" style="height: 220px; object-fit: contain; background: #f5f5f5;" onerror="this.src='https://via.placeholder.com/400x300/1a1a1a/daa520?text=Conflict+Zone'">
                 </div>
                 <div class="gallery-overlay">
                     <div class="gallery-title">Conflict Zone Coverage</div>
                     <div class="gallery-category">Military Operations</div>
                 </div>
             </div>
-
+            
             <!-- Certificate 3: Bright Star -->
             <div class="gallery-item cert-item" data-cert="military" onclick="openLightbox(this)">
                 <div class="cert-frame">
-                    <img src="25459.jpg" alt="Bright Star Certificate" style="height: 220px; object-fit: contain; background: #f5f5f5; style="transform: rotate(-90deg);"
-" onerror="this.src='https://via.placeholder.com/400x300/1a1a1a/daa520?text=Bright+Star+2023'">
+                    <img src="1000004536.jpg" alt="Bright Star Certificate" style="height: 220px; object-fit: contain; background: #f5f5f5;" onerror="this.src='https://via.placeholder.com/400x300/1a1a1a/daa520?text=Bright+Star+2023'">
                 </div>
                 <div class="gallery-overlay">
                     <div class="gallery-title">Bright Star 2023</div>
                     <div class="gallery-category">Joint Military Exercise</div>
                 </div>
             </div>
-
+            
             <!-- Certificate 4: Web Development -->
             <div class="gallery-item cert-item" data-cert="technical" onclick="openLightbox(this)">
                 <div class="cert-frame">
-                    <img src="25460.jpg" alt="Web Development Certificate" style="height: 220px; object-fit: contain; background: #f5f5f5;" onerror="this.src='https://via.placeholder.com/400x300/1a1a1a/daa520?text=Web+Development'">
+                    <img src="1000004537.jpg" alt="Web Development Certificate" style="height: 220px; object-fit: contain; background: #f5f5f5;" onerror="this.src='https://via.placeholder.com/400x300/1a1a1a/daa520?text=Web+Development'">
                 </div>
                 <div class="gallery-overlay">
                     <div class="gallery-title">Web Development Track</div>
                     <div class="gallery-category">Egypt Ministry of ICT & Udacity</div>
                 </div>
             </div>
-
+            
             <!-- Certificate 5: Navy Enan -->
             <div class="gallery-item cert-item" data-cert="military" onclick="openLightbox(this)">
                 <div class="cert-frame">
@@ -1093,7 +1102,7 @@
                     <div class="gallery-category">Naval Military Operations</div>
                 </div>
             </div>
-
+            
             <!-- Certificate 6: Medosa Enan -->
             <div class="gallery-item cert-item" data-cert="military" onclick="openLightbox(this)">
                 <div class="cert-frame">
@@ -1112,7 +1121,7 @@
             <span class="section-tag">Technical Arsenal</span>
             <h2 class="section-title">Skills & Technologies</h2>
         </div>
-
+        
         <div class="skills-container fade-in">
             <div class="skill-category">
                 <h4>Production</h4>
@@ -1135,7 +1144,7 @@
                     </li>
                 </ul>
             </div>
-
+            
             <div class="skill-category">
                 <h4>Post-Production</h4>
                 <ul class="skill-list">
@@ -1157,7 +1166,7 @@
                     </li>
                 </ul>
             </div>
-
+            
             <div class="skill-category">
                 <h4>Camera & Tech</h4>
                 <ul class="skill-list">
@@ -1190,7 +1199,7 @@
                 <p style="color: var(--text-muted); max-width: 600px; margin: 1rem auto;">
                     Currently based in Taif, Saudi Arabia. Open to directing, production leadership, and AI innovation opportunities across broadcast and digital media.
                 </p>
-
+                
                 <div class="contact-links">
                     <a href="mailto:anan.business88@gmail.com" class="contact-link">
                         <span>📧</span> anan.business88@gmail.com
@@ -1231,7 +1240,7 @@
             let interval;
             const images = item.querySelectorAll('img');
             let currentIndex = 0;
-
+            
             item.addEventListener('mouseenter', () => {
                 interval = setInterval(() => {
                     images[currentIndex].classList.remove('active');
@@ -1239,7 +1248,7 @@
                     images[currentIndex].classList.add('active');
                 }, 3000); // 3 seconds
             });
-
+            
             item.addEventListener('mouseleave', () => {
                 clearInterval(interval);
                 images[currentIndex].classList.remove('active');
@@ -1282,14 +1291,14 @@
         function filterCerts(category) {
             const items = document.querySelectorAll('.cert-item');
             const tabs = document.querySelectorAll('#certificates .gallery-tab');
-
+            
             tabs.forEach(tab => {
                 tab.classList.remove('active');
                 if (tab.textContent.toLowerCase().includes(category) || (category === 'all' && tab.textContent === 'All')) {
                     tab.classList.add('active');
                 }
             });
-
+            
             items.forEach(item => {
                 if (category === 'all' || item.dataset.cert === category) {
                     item.classList.remove('hidden');
@@ -1307,12 +1316,12 @@
             const lightbox = document.getElementById('lightbox');
             const img = document.getElementById('lightbox-img');
             const caption = document.getElementById('lightbox-caption');
-
+            
             // Get all visible items in current gallery
             const gallery = element.closest('.gallery-grid') || element.closest('.collection-grid');
             currentGallery = Array.from(gallery.querySelectorAll('.gallery-item:not(.hidden), .collection-item'));
             currentImageIndex = currentGallery.indexOf(element);
-
+            
             updateLightbox();
             lightbox.classList.add('active');
             document.body.style.overflow = 'hidden';
@@ -1322,11 +1331,11 @@
             const img = document.getElementById('lightbox-img');
             const caption = document.getElementById('lightbox-caption');
             const currentItem = currentGallery[currentImageIndex];
-
+            
             const imgSrc = currentItem.querySelector('img.active')?.src || currentItem.querySelector('img')?.src;
             const title = currentItem.querySelector('.gallery-title, .collection-title')?.textContent || '';
             const category = currentItem.querySelector('.gallery-category')?.textContent || '';
-
+            
             img.src = imgSrc;
             caption.textContent = title + (category ? ' — ' + category : '');
         }
@@ -1340,20 +1349,20 @@
 
         function changeImage(direction) {
             currentImageIndex += direction;
-
+            
             if (currentImageIndex < 0) {
                 currentImageIndex = currentGallery.length - 1;
             } else if (currentImageIndex >= currentGallery.length) {
                 currentImageIndex = 0;
             }
-
+            
             updateLightbox();
         }
 
         // Keyboard navigation
         document.addEventListener('keydown', (e) => {
             if (!document.getElementById('lightbox').classList.contains('active')) return;
-
+            
             if (e.key === 'Escape') {
                 document.getElementById('lightbox').classList.remove('active');
                 document.body.style.overflow = '';
@@ -1365,6 +1374,25 @@
         });
     </script>
 </body>
-</html>
+</html>'''
 
+# Save the HTML file
+output_path = '/mnt/kimi/output/index.html'
+with open(output_path, 'w', encoding='utf-8') as f:
+    f.write(html_content)
 
+print("=" * 60)
+print("✅ PORTFOLIO UPDATED - EQUAL SIZES FIXED!")
+print("=" * 60)
+print("\n📐 KEY FIX:")
+print("  • All 3 collection items now have FIXED height: 300px")
+print("  • Grid: 3 equal columns (33.33% each)")
+print("  • All items same size regardless of image count")
+print("\n📁 COLLECTION STRUCTURE:")
+print("  1. Production Collection (3 images)")
+print("  2. Military Exercise (4 images)")  
+print("  3. Interview Production (6 images)")
+print("\n💡 All three display at EXACTLY the same size!")
+print("\n📂 FILE SAVED:")
+print(f"  Location: {output_path}")
+print(f"  Size: {len(html_content):,} characters")
