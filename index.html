@@ -1,5 +1,5 @@
 
-# Create the updated HTML with equal-sized collection items and new image structure
+# Create the updated HTML with auto-rotation, YouTube section, and image rotation CSS
 
 html_content = '''<!DOCTYPE html>
 <html lang="en">
@@ -428,7 +428,7 @@ html_content = '''<!DOCTYPE html>
             margin-top: 0.5rem;
         }
 
-        /* Collection Section - EQUAL SIZES */
+        /* Collection Section - AUTO ROTATE */
         .collection-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -442,7 +442,7 @@ html_content = '''<!DOCTYPE html>
             cursor: pointer;
             background: var(--secondary);
             border: 1px solid rgba(255, 255, 255, 0.05);
-            height: 300px; /* FIXED HEIGHT - All same size */
+            height: 300px;
             width: 100%;
         }
 
@@ -470,6 +470,12 @@ html_content = '''<!DOCTYPE html>
             opacity: 1;
         }
 
+        /* Rotate 9:16 images 90 degrees to fit 16:9 */
+        .collection-item img.rotate-90 {
+            transform: rotate(90deg) scale(1.5);
+            object-fit: cover;
+        }
+
         .collection-overlay {
             position: absolute;
             bottom: 0;
@@ -484,6 +490,52 @@ html_content = '''<!DOCTYPE html>
             font-size: 1.1rem;
             font-weight: 600;
             color: var(--gold);
+        }
+
+        /* YouTube Section */
+        .youtube-section {
+            background: var(--secondary);
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 4rem 0;
+            border: 1px solid rgba(218, 165, 32, 0.2);
+            text-align: center;
+        }
+
+        .youtube-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: 2rem auto 0;
+            aspect-ratio: 16/9;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #1a1a1a;
+        }
+
+        .youtube-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .youtube-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 1.5rem;
+            padding: 1rem 2rem;
+            background: #ff0000;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .youtube-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 0, 0, 0.3);
         }
 
         /* Certificate specific styles */
@@ -809,6 +861,10 @@ html_content = '''<!DOCTYPE html>
             .lightbox-nav {
                 display: none;
             }
+
+            .youtube-section {
+                padding: 2rem 1rem;
+            }
         }
 
         /* Scroll animations */
@@ -835,6 +891,7 @@ html_content = '''<!DOCTYPE html>
             <li><a href="#experience">Experience</a></li>
             <li><a href="#collection">Collection</a></li>
             <li><a href="#certificates">Certificates</a></li>
+            <li><a href="#youtube">YouTube</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
     </nav>
@@ -989,12 +1046,12 @@ html_content = '''<!DOCTYPE html>
         </div>
     </section>
 
-    <!-- COLLECTION SECTION - EQUAL SIZES -->
+    <!-- COLLECTION SECTION - AUTO ROTATE -->
     <section id="collection">
         <div class="section-header fade-in">
             <span class="section-tag">Portfolio</span>
             <h2 class="section-title">Collection</h2>
-            <p style="color: var(--text-muted); margin-top: 1rem;">Hover over images to see the collection</p>
+            <p style="color: var(--text-muted); margin-top: 1rem;">Images auto-rotate every 3 seconds</p>
         </div>
         
         <div class="collection-grid" id="collectionGrid">
@@ -1116,6 +1173,28 @@ html_content = '''<!DOCTYPE html>
         </div>
     </section>
 
+    <!-- YOUTUBE SECTION - NEW -->
+    <section id="youtube" class="youtube-section fade-in">
+        <div class="section-header" style="margin-bottom: 2rem;">
+            <span class="section-tag">Channel</span>
+            <h2 class="section-title">YouTube</h2>
+            <p style="color: var(--text-muted); margin-top: 1rem;">Subscribe to my channel for more content</p>
+        </div>
+        
+        <div class="youtube-container">
+            <iframe 
+                src="https://www.youtube.com/embed/?listType=user_uploads&list=hamadaenan" 
+                title="Ahmed Anan YouTube Channel"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+            </iframe>
+        </div>
+        
+        <a href="https://youtube.com/@hamadaenan?si=lOYZaX2ocgF7m87d" target="_blank" class="youtube-link">
+            <span>▶</span> Visit @hamadaenan Channel
+        </a>
+    </section>
+
     <section id="skills">
         <div class="section-header fade-in">
             <span class="section-tag">Technical Arsenal</span>
@@ -1235,26 +1314,17 @@ html_content = '''<!DOCTYPE html>
     </div>
 
     <script>
-        // Collection hover effect - image rotation
+        // Collection AUTO-ROTATE (no hover needed)
         document.querySelectorAll('.collection-item').forEach(item => {
-            let interval;
             const images = item.querySelectorAll('img');
             let currentIndex = 0;
             
-            item.addEventListener('mouseenter', () => {
-                interval = setInterval(() => {
-                    images[currentIndex].classList.remove('active');
-                    currentIndex = (currentIndex + 1) % images.length;
-                    images[currentIndex].classList.add('active');
-                }, 3000); // 3 seconds
-            });
-            
-            item.addEventListener('mouseleave', () => {
-                clearInterval(interval);
+            // Auto-rotate every 3 seconds
+            setInterval(() => {
                 images[currentIndex].classList.remove('active');
-                currentIndex = 0;
-                images[0].classList.add('active');
-            });
+                currentIndex = (currentIndex + 1) % images.length;
+                images[currentIndex].classList.add('active');
+            }, 3000);
         });
 
         // Scroll animations
@@ -1382,17 +1452,18 @@ with open(output_path, 'w', encoding='utf-8') as f:
     f.write(html_content)
 
 print("=" * 60)
-print("✅ PORTFOLIO UPDATED - EQUAL SIZES FIXED!")
+print("✅ PORTFOLIO UPDATED WITH ALL REQUESTS!")
 print("=" * 60)
-print("\n📐 KEY FIX:")
-print("  • All 3 collection items now have FIXED height: 300px")
-print("  • Grid: 3 equal columns (33.33% each)")
-print("  • All items same size regardless of image count")
-print("\n📁 COLLECTION STRUCTURE:")
-print("  1. Production Collection (3 images)")
-print("  2. Military Exercise (4 images)")  
-print("  3. Interview Production (6 images)")
-print("\n💡 All three display at EXACTLY the same size!")
+print("\n🎨 CHANGES MADE:")
+print("  ✓ Collection images AUTO-ROTATE every 3 seconds (no hover)")
+print("  ✓ YouTube section added after Certificates")
+print("  ✓ YouTube channel: @hamadaenan")
+print("  ✓ CSS ready for 90-degree rotation (add 'rotate-90' class)")
+print("  ✓ Navigation updated with YouTube link")
+print("\n📐 IMAGE ROTATION:")
+print("  • To rotate 9:16 photos 90 degrees:")
+print("  • Add class='rotate-90' to any img tag")
+print("  • Example: <img src='24626.jpg' class='rotate-90'>")
 print("\n📂 FILE SAVED:")
 print(f"  Location: {output_path}")
 print(f"  Size: {len(html_content):,} characters")
