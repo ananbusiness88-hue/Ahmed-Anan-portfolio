@@ -1,0 +1,1358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ahmed Anan | Creative Director & AI Production Lead</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0a0a0a;
+            --secondary: #1a1a1a;
+            --accent: #00d4ff;
+            --accent-dim: rgba(0, 212, 255, 0.1);
+            --text: #f5f5f5;
+            --text-muted: #888;
+            --gradient: linear-gradient(135deg, #00d4ff 0%, #7b2cbf 100%);
+            --gold: #daa520;
+            --gold-light: #ffd700;
+            --green-dot: #22c55e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--primary);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            padding: 2rem;
+            background: radial-gradient(ellipse at center, #1a1a2e 0%, #0a0a0a 70%);
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: 
+                linear-gradient(45deg, transparent 48%, rgba(0, 212, 255, 0.03) 50%, transparent 52%),
+                linear-gradient(-45deg, transparent 48%, rgba(123, 44, 191, 0.03) 50%, transparent 52%);
+            background-size: 60px 60px;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(60px, 60px); }
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            max-width: 900px;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 20px;
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid var(--green-dot);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            color: var(--green-dot);
+            margin-bottom: 2rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--green-dot);
+            border-radius: 50%;
+            animation: blink 1.5s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 7vw, 5.5rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--gold);
+            text-shadow: 0 0 30px rgba(218, 165, 32, 0.3);
+            line-height: 1.1;
+            letter-spacing: 2px;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            margin: 3rem 0;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--gradient);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text);
+            border: 1px solid var(--text-muted);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 3rem;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--gold);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--text);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            margin-bottom: 4rem;
+        }
+
+        .section-tag {
+            color: var(--gold);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 1rem;
+        }
+
+        /* Expertise Grid */
+        .expertise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .expertise-card {
+            background: var(--secondary);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .expertise-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--gold), var(--accent));
+            transform: scaleX(0);
+            transition: transform 0.3s;
+        }
+
+        .expertise-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .expertise-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(218, 165, 32, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .expertise-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(218, 165, 32, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(218, 165, 32, 0.3);
+        }
+
+        .expertise-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .expertise-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 3rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--gold), transparent);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 3rem;
+            opacity: 0;
+            transform: translateX(-20px);
+            animation: slideIn 0.6s forwards;
+        }
+
+        .timeline-item:nth-child(1) { animation-delay: 0.1s; }
+        .timeline-item:nth-child(2) { animation-delay: 0.2s; }
+        .timeline-item:nth-child(3) { animation-delay: 0.3s; }
+        .timeline-item:nth-child(4) { animation-delay: 0.4s; }
+        .timeline-item:nth-child(5) { animation-delay: 0.5s; }
+
+        @keyframes slideIn {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -3rem;
+            top: 0;
+            width: 12px;
+            height: 12px;
+            background: var(--primary);
+            border: 3px solid var(--gold);
+            border-radius: 50%;
+            transform: translateX(-5px);
+        }
+
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-role {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .timeline-org {
+            color: var(--gold);
+            font-weight: 500;
+        }
+
+        .timeline-date {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            padding: 4px 12px;
+            background: rgba(218, 165, 32, 0.1);
+            border: 1px solid rgba(218, 165, 32, 0.3);
+            border-radius: 20px;
+        }
+
+        .timeline-desc {
+            color: var(--text-muted);
+            margin-top: 0.5rem;
+        }
+
+        /* Gallery Styles */
+        .gallery-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .gallery-tab {
+            padding: 0.8rem 1.5rem;
+            background: var(--secondary);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        .gallery-tab:hover, .gallery-tab.active {
+            background: var(--gold);
+            color: var(--primary);
+            border-color: var(--gold);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            cursor: pointer;
+            background: var(--secondary);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+            aspect-ratio: 16/10;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            border-color: var(--gold);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: opacity 0.5s ease;
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            padding: 1.5rem;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+
+        .gallery-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .gallery-category {
+            font-size: 0.85rem;
+            color: var(--gold);
+        }
+
+        /* Collection Section - Special Hover Effect */
+        .collection-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .collection-item {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            cursor: pointer;
+            background: var(--secondary);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            aspect-ratio: 4/3;
+        }
+
+        .collection-item:hover {
+            border-color: var(--gold);
+            box-shadow: 0 20px 40px rgba(218, 165, 32, 0.2);
+        }
+
+        .collection-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .collection-item img.active {
+            opacity: 1;
+        }
+
+        .collection-item img:first-child {
+            opacity: 1;
+        }
+
+        .collection-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            padding: 1.5rem;
+            z-index: 10;
+        }
+
+        .collection-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--gold);
+        }
+
+        /* Certificate specific styles */
+        .cert-frame {
+            background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
+            padding: 8px;
+            border-radius: 12px;
+        }
+
+        .cert-frame img {
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+        }
+
+        .lightbox img {
+            max-width: 100%;
+            max-height: 85vh;
+            object-fit: contain;
+            border-radius: 8px;
+            border: 2px solid var(--gold);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            font-size: 2.5rem;
+            color: var(--text);
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0.5rem;
+        }
+
+        .lightbox-caption {
+            text-align: center;
+            margin-top: 1rem;
+            color: var(--text);
+            font-size: 1.1rem;
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 3rem;
+            color: var(--text);
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .lightbox-nav:hover {
+            background: var(--gold);
+            color: var(--primary);
+        }
+
+        .lightbox-prev { left: 2rem; }
+        .lightbox-next { right: 2rem; }
+
+        /* Skills */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+
+        .skill-category h4 {
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .skill-list {
+            list-style: none;
+        }
+
+        .skill-item {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .skill-bar {
+            width: 100px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--gold), var(--accent));
+            border-radius: 2px;
+        }
+
+        /* Contact */
+        .contact-section {
+            background: var(--secondary);
+            border-radius: 30px;
+            padding: 4rem;
+            text-align: center;
+            margin-top: 4rem;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(218, 165, 32, 0.2);
+        }
+
+        .contact-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(218, 165, 32, 0.1) 0%, transparent 70%);
+            opacity: 0.5;
+        }
+
+        .contact-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            color: var(--text);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50px;
+            transition: all 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .contact-link:hover {
+            background: var(--gold);
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: var(--text-muted);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 1.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero-stats {
+                gap: 2rem;
+            }
+
+            section {
+                padding: 4rem 1.5rem;
+            }
+
+            .timeline {
+                padding-left: 2rem;
+            }
+
+            .contact-section {
+                padding: 2rem;
+            }
+
+            .gallery-grid, .collection-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .lightbox-nav {
+                display: none;
+            }
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .hidden { display: none !important; }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <nav>
+        <div class="logo">AE</div>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#expertise">Expertise</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#collection">Collection</a></li>
+            <li><a href="#certificates">Certificates</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <div class="status-badge">
+                <span class="status-dot"></span>
+                Available for Opportunities
+            </div>
+            <h1>Ahmed Anan</h1>
+            <p class="hero-subtitle">Head of Programs (AI-Driven Content) · Senior Program Director<br>Broadcast · Documentaries · AI-Integrated Production</p>
+
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-number">15+</span>
+                    <span class="stat-label">Years Experience</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">50+</span>
+                    <span class="stat-label">Major Productions</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">5</span>
+                    <span class="stat-label">Countries</span>
+                </div>
+            </div>
+
+            <div class="cta-buttons">
+                <a href="#collection" class="btn btn-primary">View My Work</a>
+                <a href="https://www.linkedin.com/in/ahmed-enan-9b205172" target="_blank" class="btn btn-secondary">LinkedIn Profile</a>
+            </div>
+        </div>
+    </header>
+
+    <section id="about" class="fade-in">
+        <div class="section-header">
+            <span class="section-tag">Overview</span>
+            <h2 class="section-title">Bridging Broadcast Excellence with AI Innovation</h2>
+        </div>
+        <p style="font-size: 1.1rem; color: var(--text-muted); line-height: 1.8;">
+            Senior media professional with over 15 years commanding broadcast production, program direction, and content leadership within major television networks across Egypt, Turkey, and Saudi Arabia. I specialize in integrating AI-driven tools to revolutionize editorial preparation, production efficiency, and post-production workflows while maintaining the highest editorial standards in fast-paced newsroom environments.
+        </p>
+    </section>
+
+    <section id="expertise">
+        <div class="section-header fade-in">
+            <span class="section-tag">Core Competencies</span>
+            <h2 class="section-title">Expertise & Capabilities</h2>
+        </div>
+
+        <div class="expertise-grid">
+            <div class="expertise-card fade-in">
+                <div class="expertise-icon">📡</div>
+                <h3>Broadcast Direction</h3>
+                <p>End-to-end production oversight for news programs, political talk shows, documentaries, and live broadcasts from concept to final delivery.</p>
+            </div>
+
+            <div class="expertise-card fade-in">
+                <div class="expertise-icon">🤖</div>
+                <h3>AI Production Integration</h3>
+                <p>Implementing AI tools across research, content development, editing, and visual enhancement to optimize workflows and storytelling impact.</p>
+            </div>
+
+            <div class="expertise-card fade-in">
+                <div class="expertise-icon">🎬</div>
+                <h3>Documentary Filmmaking</h3>
+                <p>Directing and filming high-profile interviews and military coverage, including live exercises and war reporting from conflict zones.</p>
+            </div>
+
+            <div class="expertise-card fade-in">
+                <div class="expertise-icon">👥</div>
+                <h3>Team Leadership</h3>
+                <p>Leading multidisciplinary teams of producers, editors, GFX artists, and technical staff across high-pressure broadcast environments.</p>
+            </div>
+
+            <div class="expertise-card fade-in">
+                <div class="expertise-icon">⚡</div>
+                <h3>Live Broadcasting</h3>
+                <p>Directing live news bulletins, studio programs, and breaking news coverage with precision timing and editorial accuracy.</p>
+            </div>
+
+            <div class="expertise-card fade-in">
+                <div class="expertise-icon">🎨</div>
+                <h3>Visual Storytelling</h3>
+                <p>Crafting creative visual strategies, on-air graphics, and promotional content that enhance channel branding and viewer engagement.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience">
+        <div class="section-header fade-in">
+            <span class="section-tag">Career Journey</span>
+            <h2 class="section-title">Professional Experience</h2>
+        </div>
+
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-header">
+                    <div>
+                        <div class="timeline-role">Program Director / Senior Director</div>
+                        <div class="timeline-org">Broadcast & Television Production</div>
+                    </div>
+                    <span class="timeline-date">2008 - Present</span>
+                </div>
+                <p class="timeline-desc">Overseeing end-to-end production of television programs, documentaries, political talk shows, and special reports. Managing live broadcasts and breaking news coverage including war reporting and military exercises.</p>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-header">
+                    <div>
+                        <div class="timeline-role">Director, Editor & Videographer</div>
+                        <div class="timeline-org">Moral Affairs Department — Egyptian Armed Forces</div>
+                    </div>
+                    <span class="timeline-date">2016 - Present</span>
+                </div>
+                <p class="timeline-desc">Directed high-profile interviews with senior military leadership. Covered live military exercises (AHMOS 2019, Bright Star 2023) operating DSLR and drone systems for aerial and ground footage.</p>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-header">
+                    <div>
+                        <div class="timeline-role">Director</div>
+                        <div class="timeline-org">TRT Arabic (Turkey)</div>
+                    </div>
+                    <span class="timeline-date">Previous</span>
+                </div>
+                <p class="timeline-desc">Directed the political talk show "Maidan Al-Syasa," managing studio output, live direction, and post-production in alignment with international broadcast editorial standards.</p>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-header">
+                    <div>
+                        <div class="timeline-role">Senior Director</div>
+                        <div class="timeline-org">Syria Elghad</div>
+                    </div>
+                    <span class="timeline-date">Previous</span>
+                </div>
+                <p class="timeline-desc">Directed flagship political and morning programs, managing production teams and editorial coordination for news bulletins and war reporting from conflict environments.</p>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-header">
+                    <div>
+                        <div class="timeline-role">Creative Director</div>
+                        <div class="timeline-org">Masr Elhayat TV</div>
+                    </div>
+                    <span class="timeline-date">Previous</span>
+                </div>
+                <p class="timeline-desc">Led editing and GFX teams, developing creative visual strategies for on-air graphics, promos, and teasers while enhancing channel branding and viewer engagement.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW COLLECTION SECTION -->
+    <section id="collection">
+        <div class="section-header fade-in">
+            <span class="section-tag">Portfolio</span>
+            <h2 class="section-title">Collection</h2>
+            <p style="color: var(--text-muted); margin-top: 1rem;">Hover over images to see the collection</p>
+        </div>
+
+        <div class="collection-grid" id="collectionGrid">
+            <!-- Collection items with rotating images on hover -->
+            <div class="collection-item" onclick="openLightbox(this)" data-images="1000004541.jpg,1000004543.jpg,1000004545.jpg">
+                <img src="1000004541.jpg" alt="Work 1" class="active" onerror="this.src='https://images.unsplash.com/photo-1595590424283-b8f17842773f?w=800&q=80'">
+                <img src="1000004543.jpg" alt="Work 2" onerror="this.src='https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=800&q=80'">
+                <img src="1000004545.jpg" alt="Work 3" onerror="this.src='https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=800&q=80'">
+                <div class="collection-overlay">
+                    <div class="collection-title">Production Collection 1</div>
+                </div>
+            </div>
+
+            <div class="collection-item" onclick="openLightbox(this)" data-images="1000004546.jpg,1000004547.jpg,1000004549.jpg">
+                <img src="1000004546.jpg" alt="Work 4" class="active" onerror="this.src='https://images.unsplash.com/photo-1542744095-fcf48d80b0fd?w=800&q=80'">
+                <img src="1000004547.jpg" alt="Work 5" onerror="this.src='https://images.unsplash.com/photo-1536240478700-b869070f9279?w=800&q=80'">
+                <img src="1000004549.jpg" alt="Work 6" onerror="this.src='https://images.unsplash.com/photo-1471341971476-ae15ff5dd4ea?w=800&q=80'">
+                <div class="collection-overlay">
+                    <div class="collection-title">Production Collection 2</div>
+                </div>
+            </div>
+
+            <div class="collection-item" onclick="openLightbox(this)" data-images="1000004550.jpg,1000004551.jpg,1000004552.jpg">
+                <img src="1000004550.jpg" alt="Work 7" class="active" onerror="this.src='https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=800&q=80'">
+                <img src="1000004551.jpg" alt="Work 8" onerror="this.src='https://images.unsplash.com/photo-1506947411487-a56738267384?w=800&q=80'">
+                <img src="1000004552.jpg" alt="Work 9" onerror="this.src='https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=800&q=80'">
+                <div class="collection-overlay">
+                    <div class="collection-title">Production Collection 3</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="certificates">
+        <div class="section-header fade-in">
+            <span class="section-tag">Credentials</span>
+            <h2 class="section-title">Certificates & Recognition</h2>
+        </div>
+
+        <div class="gallery-tabs fade-in">
+            <button class="gallery-tab active" onclick="filterCerts('all')">All</button>
+            <button class="gallery-tab" onclick="filterCerts('military')">Military</button>
+            <button class="gallery-tab" onclick="filterCerts('professional')">Professional</button>
+            <button class="gallery-tab" onclick="filterCerts('technical')">Technical</button>
+        </div>
+
+        <div class="gallery-grid" id="certGallery">
+            <!-- Certificate 1: Tabuk 5 -->
+            <div class="gallery-item cert-item" data-cert="military" onclick="openLightbox(this)">
+                <div class="cert-frame">
+                    <img src="1000004534.jpg" alt="Tabuk 5 2021 Certificate" style="height: 220px; object-fit: contain; background: #f5f5f5;" onerror="this.src='https://via.placeholder.com/400x300/1a1a1a/daa520?text=Tabuk+5+2021'">
+                </div>
+                <div class="gallery-overlay">
+                    <div class="gallery-title">Tabuk 5 2021</div>
+                    <div class="gallery-category">Saudi Ministry of Defense</div>
+                </div>
+            </div>
+
+            <!-- Certificate 2: Conflict Zone -->
+            <div class="gallery-item cert-item" data-cert="military" onclick="openLightbox(this)">
+                <div class="cert-frame">
+                    <img src="1000004535.jpg" alt="Conflict Zone Certificate" style="height: 220px; object-fit: contain; background: #f5f5f5;" onerror="this.src='https://via.placeholder.com/400x300/1a1a1a/daa520?text=Conflict+Zone'">
+                </div>
+                <div class="gallery-overlay">
+                    <div class="gallery-title">Conflict Zone Coverage</div>
+                    <div class="gallery-category">Military Operations</div>
+                </div>
+            </div>
+
+            <!-- Certificate 3: Bright Star -->
+            <div class="gallery-item cert-item" data-cert="military" onclick="openLightbox(this)">
+                <div class="cert-frame">
+                    <img src="1000004536.jpg" alt="Bright Star Certificate" style="height: 220px; object-fit: contain; background: #f5f5f5;" onerror="this.src='https://via.placeholder.com/400x300/1a1a1a/daa520?text=Bright+Star+2023'">
+                </div>
+                <div class="gallery-overlay">
+                    <div class="gallery-title">Bright Star 2023</div>
+                    <div class="gallery-category">Joint Military Exercise</div>
+                </div>
+            </div>
+
+            <!-- Certificate 4: Web Development -->
+            <div class="gallery-item cert-item" data-cert="technical" onclick="openLightbox(this)">
+                <div class="cert-frame">
+                    <img src="1000004537.jpg" alt="Web Development Certificate" style="height: 220px; object-fit: contain; background: #f5f5f5;" onerror="this.src='https://via.placeholder.com/400x300/1a1a1a/daa520?text=Web+Development'">
+                </div>
+                <div class="gallery-overlay">
+                    <div class="gallery-title">Web Development Track</div>
+                    <div class="gallery-category">Egypt Ministry of ICT & Udacity</div>
+                </div>
+            </div>
+
+            <!-- Certificate 5: Navy Enan -->
+            <div class="gallery-item cert-item" data-cert="military" onclick="openLightbox(this)">
+                <div class="cert-frame">
+                    <img src="navy enan.png" alt="Navy Certificate" style="height: 220px; object-fit: contain; background: #f5f5f5;" onerror="this.src='https://via.placeholder.com/400x300/1a1a1a/daa520?text=Navy+Certificate'">
+                </div>
+                <div class="gallery-overlay">
+                    <div class="gallery-title">Egyptian Navy Operations</div>
+                    <div class="gallery-category">Naval Military Operations</div>
+                </div>
+            </div>
+
+            <!-- Certificate 6: Medosa Enan -->
+            <div class="gallery-item cert-item" data-cert="military" onclick="openLightbox(this)">
+                <div class="cert-frame">
+                    <img src="medosa enan.png" alt="Medosa Certificate" style="height: 220px; object-fit: contain; background: #f5f5f5;" onerror="this.src='https://via.placeholder.com/400x300/1a1a1a/daa520?text=Naval+Certificate'">
+                </div>
+                <div class="gallery-overlay">
+                    <div class="gallery-title">Naval Operations</div>
+                    <div class="gallery-category">Maritime Military Exercise</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <div class="section-header fade-in">
+            <span class="section-tag">Technical Arsenal</span>
+            <h2 class="section-title">Skills & Technologies</h2>
+        </div>
+
+        <div class="skills-container fade-in">
+            <div class="skill-category">
+                <h4>Production</h4>
+                <ul class="skill-list">
+                    <li class="skill-item">
+                        <span>Broadcast Direction</span>
+                        <div class="skill-bar"><div class="skill-progress" style="width: 95%"></div></div>
+                    </li>
+                    <li class="skill-item">
+                        <span>Live Production</span>
+                        <div class="skill-bar"><div class="skill-progress" style="width: 95%"></div></div>
+                    </li>
+                    <li class="skill-item">
+                        <span>Documentary Direction</span>
+                        <div class="skill-bar"><div class="skill-progress" style="width: 90%"></div></div>
+                    </li>
+                    <li class="skill-item">
+                        <span>AI Workflow Integration</span>
+                        <div class="skill-bar"><div class="skill-progress" style="width: 85%"></div></div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="skill-category">
+                <h4>Post-Production</h4>
+                <ul class="skill-list">
+                    <li class="skill-item">
+                        <span>Adobe Premiere Pro</span>
+                        <div class="skill-bar"><div class="skill-progress" style="width: 95%"></div></div>
+                    </li>
+                    <li class="skill-item">
+                        <span>After Effects</span>
+                        <div class="skill-bar"><div class="skill-progress" style="width: 90%"></div></div>
+                    </li>
+                    <li class="skill-item">
+                        <span>Final Cut Pro</span>
+                        <div class="skill-bar"><div class="skill-progress" style="width: 85%"></div></div>
+                    </li>
+                    <li class="skill-item">
+                        <span>Photoshop</span>
+                        <div class="skill-bar"><div class="skill-progress" style="width: 80%"></div></div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="skill-category">
+                <h4>Camera & Tech</h4>
+                <ul class="skill-list">
+                    <li class="skill-item">
+                        <span>DSLR Systems</span>
+                        <div class="skill-bar"><div class="skill-progress" style="width: 95%"></div></div>
+                    </li>
+                    <li class="skill-item">
+                        <span>Drone Operation</span>
+                        <div class="skill-bar"><div class="skill-progress" style="width: 85%"></div></div>
+                    </li>
+                    <li class="skill-item">
+                        <span>Studio Cameras</span>
+                        <div class="skill-bar"><div class="skill-progress" style="width: 90%"></div></div>
+                    </li>
+                    <li class="skill-item">
+                        <span>Professional Equipment</span>
+                        <div class="skill-bar"><div class="skill-progress" style="width: 95%"></div></div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="contact-section fade-in">
+            <div class="contact-content">
+                <span class="section-tag">Let's Connect</span>
+                <h2 class="contact-title">Ready to Create Something Extraordinary?</h2>
+                <p style="color: var(--text-muted); max-width: 600px; margin: 1rem auto;">
+                    Currently based in Taif, Saudi Arabia. Open to directing, production leadership, and AI innovation opportunities across broadcast and digital media.
+                </p>
+
+                <div class="contact-links">
+                    <a href="mailto:anan.business88@gmail.com" class="contact-link">
+                        <span>📧</span> anan.business88@gmail.com
+                    </a>
+                    <a href="https://www.linkedin.com/in/ahmed-enan-9b205172" target="_blank" class="contact-link">
+                        <span>💼</span> LinkedIn
+                    </a>
+                    <a href="tel:+966548507549" class="contact-link">
+                        <span>📱</span> +966 54 850 7549
+                    </a>
+                    <a href="tel:+966562672089" class="contact-link">
+                        <span>📞</span> +966 56 267 2089
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p style="color: var(--gold);">Ahmed Anan</p>
+        <p style="margin-top: 0.5rem; font-size: 0.9rem;">Broadcast Director & AI Production Lead</p>
+    </footer>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+        <button class="lightbox-close" onclick="closeLightbox(event)">&times;</button>
+        <button class="lightbox-nav lightbox-prev" onclick="changeImage(-1)">‹</button>
+        <div class="lightbox-content">
+            <img id="lightbox-img" src="" alt="">
+            <div class="lightbox-caption" id="lightbox-caption"></div>
+        </div>
+        <button class="lightbox-nav lightbox-next" onclick="changeImage(1)">›</button>
+    </div>
+
+    <script>
+        // Collection hover effect - image rotation
+        document.querySelectorAll('.collection-item').forEach(item => {
+            let interval;
+            const images = item.querySelectorAll('img');
+            let currentIndex = 0;
+
+            item.addEventListener('mouseenter', () => {
+                interval = setInterval(() => {
+                    images[currentIndex].classList.remove('active');
+                    currentIndex = (currentIndex + 1) % images.length;
+                    images[currentIndex].classList.add('active');
+                }, 3000); // 3 seconds
+            });
+
+            item.addEventListener('mouseleave', () => {
+                clearInterval(interval);
+                images[currentIndex].classList.remove('active');
+                currentIndex = 0;
+                images[0].classList.add('active');
+            });
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Certificate filtering
+        function filterCerts(category) {
+            const items = document.querySelectorAll('.cert-item');
+            const tabs = document.querySelectorAll('#certificates .gallery-tab');
+
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+                if (tab.textContent.toLowerCase().includes(category) || (category === 'all' && tab.textContent === 'All')) {
+                    tab.classList.add('active');
+                }
+            });
+
+            items.forEach(item => {
+                if (category === 'all' || item.dataset.cert === category) {
+                    item.classList.remove('hidden');
+                } else {
+                    item.classList.add('hidden');
+                }
+            });
+        }
+
+        // Lightbox functionality
+        let currentImageIndex = 0;
+        let currentGallery = [];
+
+        function openLightbox(element) {
+            const lightbox = document.getElementById('lightbox');
+            const img = document.getElementById('lightbox-img');
+            const caption = document.getElementById('lightbox-caption');
+
+            // Get all visible items in current gallery
+            const gallery = element.closest('.gallery-grid') || element.closest('.collection-grid');
+            currentGallery = Array.from(gallery.querySelectorAll('.gallery-item:not(.hidden), .collection-item'));
+            currentImageIndex = currentGallery.indexOf(element);
+
+            updateLightbox();
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function updateLightbox() {
+            const img = document.getElementById('lightbox-img');
+            const caption = document.getElementById('lightbox-caption');
+            const currentItem = currentGallery[currentImageIndex];
+
+            const imgSrc = currentItem.querySelector('img.active')?.src || currentItem.querySelector('img')?.src;
+            const title = currentItem.querySelector('.gallery-title, .collection-title')?.textContent || '';
+            const category = currentItem.querySelector('.gallery-category')?.textContent || '';
+
+            img.src = imgSrc;
+            caption.textContent = title + (category ? ' — ' + category : '');
+        }
+
+        function closeLightbox(event) {
+            if (event.target.classList.contains('lightbox') || event.target.classList.contains('lightbox-close')) {
+                document.getElementById('lightbox').classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+
+        function changeImage(direction) {
+            currentImageIndex += direction;
+
+            if (currentImageIndex < 0) {
+                currentImageIndex = currentGallery.length - 1;
+            } else if (currentImageIndex >= currentGallery.length) {
+                currentImageIndex = 0;
+            }
+
+            updateLightbox();
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (!document.getElementById('lightbox').classList.contains('active')) return;
+
+            if (e.key === 'Escape') {
+                document.getElementById('lightbox').classList.remove('active');
+                document.body.style.overflow = '';
+            } else if (e.key === 'ArrowLeft') {
+                changeImage(-1);
+            } else if (e.key === 'ArrowRight') {
+                changeImage(1);
+            }
+        });
+    </script>
+</body>
+</html>
